@@ -1,0 +1,38 @@
+version: '3.7'
+services:
+  php8:
+    container_name: php8
+    build: php8
+    volumes:
+      - ./api:/var/www/html
+
+  database:
+    container_name: postgresql
+    image: postgres:13-alpine
+    environment:
+      POSTGRES_DB: kwizz
+      POSTGRES_PASSWORD: root
+      POSTGRES_USER: symfony
+    volumes:
+      - db-data:/var/lib/postgresql/data:rw
+    ports:
+      - "55432:5432"
+
+  nginx:
+    container_name: nginx
+    build:
+      context: ./nginx
+    volumes:
+      - ./api:/var/www/html
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/sites/:/etc/nginx/sites-available
+      - ./nginx/conf.d/:/etc/nginx/conf.d
+      - ./logs:/var/log
+    depends_on:
+      - php8
+    ports:
+      - "80:80"
+      - "443:443"
+
+volumes:
+  db-data:
