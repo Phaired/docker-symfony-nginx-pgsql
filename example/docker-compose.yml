@@ -10,7 +10,7 @@ services:
     container_name: ${COMPOSE_PROJECT_NAME}_PGSQL
     image: ${PGSQL_IMAGE}
     environment:
-      POSTGRES_DB: kwizz
+      POSTGRES_DB: projet
       POSTGRES_PASSWORD: root
       POSTGRES_USER: symfony
     volumes:

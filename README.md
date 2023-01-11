@@ -8,3 +8,7 @@ then you can connect to the php container and do
 
 
 composer and symfony CLI are installed on php container
+
+
+## TODO
+add php extensions as .env var

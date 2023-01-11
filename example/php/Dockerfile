@@ -6,7 +6,7 @@ ENV TZ=Europe/Paris
 
 ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
 
-RUN chmod +x /usr/local/bin/install-php-extensions && install-php-extensions
+RUN chmod +x /usr/local/bin/install-php-extensions && install-php-extensions pdo_pgsql
 
 RUN curl -o /usr/local/bin/composer https://getcomposer.org/download/latest-stable/composer.phar && \
     chmod +x /usr/local/bin/composer
