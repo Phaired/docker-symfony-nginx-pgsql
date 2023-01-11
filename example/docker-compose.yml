@@ -1,14 +1,14 @@
-version: '3.7'
+version: '3.8'
 services:
-  php8:
-    container_name: php8
-    build: php8
+  php:
+    container_name: ${COMPOSE_PROJECT_NAME}_PHP
+    build: php
     volumes:
       - ./api:/var/www/html
 
   database:
-    container_name: postgresql
-    image: postgres:13-alpine
+    container_name: ${COMPOSE_PROJECT_NAME}_PGSQL
+    image: ${PGSQL_IMAGE}
     environment:
       POSTGRES_DB: kwizz
       POSTGRES_PASSWORD: root
@@ -19,7 +19,7 @@ services:
       - "55432:5432"
 
   nginx:
-    container_name: nginx
+    container_name: ${COMPOSE_PROJECT_NAME}_NGINX
     build:
       context: ./nginx
     volumes:
@@ -29,7 +29,7 @@ services:
       - ./nginx/conf.d/:/etc/nginx/conf.d
       - ./logs:/var/log
     depends_on:
-      - php8
+      - php
     ports:
       - "80:80"
       - "443:443"
