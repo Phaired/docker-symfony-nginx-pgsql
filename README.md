@@ -4,6 +4,10 @@
 
 You can check the `.env` file to rename compose project
 
+
+#### Symfony Project
+
+
 1. First run `docker-compose up`
 
 2. Get the container id using `docker ps` <br> and get the id of the container named _COMPOSE_PROJECT_NAME_ _php (only the first few char are needed)
@@ -12,11 +16,16 @@ You can check the `.env` file to rename compose project
  and do `symfony new . --webapp`
 4. Go to http://localhost :)
 
+#### Classic PHP Project
+
+1. First run `docker-compose up`
+
+2. Then you can create a /api/public/index.php and start your project 
+
 ### Informations
 
 Composer and symfony CLI are installed on the PHP container
 
 
 ### TODO
-* Add php extensions as .env var
-* Add php version as .env var
+* /
