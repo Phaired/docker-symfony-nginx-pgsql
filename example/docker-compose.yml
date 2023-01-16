@@ -1,18 +1,26 @@
 version: '3.8'
 services:
+
   php:
     container_name: ${COMPOSE_PROJECT_NAME}_PHP
-    build: php
+    build:
+      context: ./php
+      args:
+        PHP_EXTENSIONS: ${PHP_EXTENSIONS}
+        PHP_VERSION: ${PHP_VERSION}
+        PHP_ALPINE: ${PHP_ALPINE}
+        TIMEZONE: ${TIMEZONE}
     volumes:
       - ./api:/var/www/html
+
 
   database:
     container_name: ${COMPOSE_PROJECT_NAME}_PGSQL
     image: ${PGSQL_IMAGE}
     environment:
       POSTGRES_DB: projet
-      POSTGRES_PASSWORD: root
       POSTGRES_USER: symfony
+      POSTGRES_PASSWORD: root
     volumes:
       - db-data:/var/lib/postgresql/data:rw
     ports:
@@ -20,8 +28,7 @@ services:
 
   nginx:
     container_name: ${COMPOSE_PROJECT_NAME}_NGINX
-    build:
-      context: ./nginx
+    build: ./nginx
     volumes:
       - ./api:/var/www/html
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
