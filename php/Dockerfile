@@ -4,9 +4,18 @@ FROM php:${PHP_VERSION}-fpm-alpine
 ARG PHP_EXTENSIONS
 ARG TIMEZONE
 
-RUN apk add --no-cache tzdata
+
+ENV LANG=en_US.UTF-8 \
+    LANGUAGE=en_US.UTF-8 \
+    LC_CTYPE=en_US.UTF-8 \
+    LC_ALL=en_US.UTF-8
+
+
+RUN apk add --no-cache musl musl-utils musl-locales tzdata
 ENV TZ $TIMEZONE
 RUN printf '[PHP]\ndate.timezone = '${TZ}'\n' > /usr/local/etc/php/conf.d/tzone.ini
+
+
 
 ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
 
