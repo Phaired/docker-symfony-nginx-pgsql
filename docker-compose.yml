@@ -8,7 +8,6 @@ services:
       args:
         PHP_EXTENSIONS: ${PHP_EXTENSIONS}
         PHP_VERSION: ${PHP_VERSION}
-        PHP_ALPINE: ${PHP_ALPINE}
         TIMEZONE: ${TIMEZONE}
     volumes:
       - ./api:/var/www/html
